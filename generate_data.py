@@ -70,13 +70,15 @@ df['sentiment_positive'] = [p['pos'] for p in polarity_scores]
 df['sentiment_negative'] = [p['neg'] for p in polarity_scores]
 df['sentiment_neutral'] = [p['neu'] for p in polarity_scores]
 target = df['toxic']
-df = df.drop(columns=['id','toxic','comment_text'])
+df = df.drop(columns=['id','comment_text'])
 df.to_csv("train_cleaned.csv")
+target = df['toxic']
+df = df.drop(columns=["toxic"])
 print(df)
-x_train, x_test, y_train, y_test = train_test_split(df, target, test_size=0.25, random_state=0)
-model = LogisticRegression(class_weight='balanced')
-model.fit(x_train,y_train)
-y_pred = model.predict(x_test)
-score = model.score(x_test, y_test)
-print(score)
-print(f1_score(y_test,y_pred))
+# x_train, x_test, y_train, y_test = train_test_split(df, target, test_size=0.25, random_state=0)
+# model = LogisticRegression(class_weight='balanced')
+# model.fit(x_train,y_train)
+# y_pred = model.predict(x_test)
+# score = model.score(x_test, y_test)
+# print(score)
+# print(f1_score(y_test,y_pred))
